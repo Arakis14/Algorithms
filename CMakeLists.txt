@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.13)
+project(Algorithms)
+set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-Wall -Wextra -Wpedantic -Wconversion -O2 -std=c++1z)
+add_executable(${PROJECT_NAME} main.cpp)
