@@ -29,9 +29,12 @@ std::string FindCommonPrefix(const std::string& str1, const std::string& str2) {
             index1++;
             long unsigned int index2 = index1;
             for (const auto &j : str2) {
-                std::cout << i << " " << j << '\n';
                 if (index1 == index2) {
+                    std::cout << "Same Index!" << '\n';
+                    std::cout << index1 << " " << index2 << '\n';
                     if (i == j) {
+                    std::cout << "Same Char!" <<'\n';
+                    std::cout << i << " " << j << '\n';
                     res+=i;
                     }
                 } else { 
@@ -70,5 +73,5 @@ int main()
     //printVec(strs);
     std::vector<std::string> strs2 = {"dog","racecar","car"};
     std::cout << longestCommonPrefix(strs) << '\n';
-    std::cout << longestCommonPrefix(strs2) << '\n';
+    //std::cout << longestCommonPrefix(strs2) << '\n';
 }
