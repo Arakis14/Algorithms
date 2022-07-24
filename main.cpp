@@ -22,56 +22,53 @@ void printVec (const std::vector<T>& vec) {
 
 std::string FindCommonPrefix(const std::string& str1, const std::string& str2) {
     std::string res{""};
-    long unsigned int size = (str1.length() > str2.length()) ? str1.length()/2 : str2.length()/2;
-    for (const auto &i : str1) {
-        long unsigned int index1 = 0;
-        if ( size >= index1) { 
-            index1++;
-            long unsigned int index2 = index1;
-            for (const auto &j : str2) {
-                if (index1 == index2) {
-                    std::cout << "Same Index!" << '\n';
-                    std::cout << index1 << " " << index2 << '\n';
-                    if (i == j) {
+    for (long unsigned int i = 0; i < str1.size(); i++) {
+        for (long unsigned int j = 0; j < str2.size(); j++) {
+            if (i == j) {
+                if (str1.at(i) == str2.at(j)) {
+                    /*
                     std::cout << "Same Char!" <<'\n';
-                    std::cout << i << " " << j << '\n';
-                    res+=i;
-                    }
-                } else { 
-                index2++;
-                continue;
-                }
+                    std::cout << str1.at(i) << " " << str2.at(j) << '\n';
+                    */
+                    res+=str1.at(i);
+                } else { return res; }
             }
         }
-        else { break; }
     }
     return res;
-
 }
 
 std::string longestCommonPrefix(const std::vector<std::string>& strs) {
     std::string res{""};
+    int counter = 0;
+    int tempcounter = 0;
+    if (strs.at(0).size() == 1) {
+        return strs.at(0);
+    }
     for (auto itr1 = std::begin(strs); itr1 != strs.end(); itr1++) {
         for (auto itr2 = std::next(itr1); itr2 != strs.end(); itr2++) {
             auto temp = FindCommonPrefix(*itr1, *itr2);
-            std::cout << "Temp: " << temp << '\n';
+            if (temp.size() > 0) {
+                 counter++;
+                 tempcounter++;
+            } else { counter++; }
+            //std::cout << "Temp: " << temp << '\n';
             if (res.length() != 0) {
                 if (res == temp) { continue; }
-                else if ( temp.length() > res.length()) {
+                else if (  res.length() > temp.length()) {
                     res = temp;
                 }
-            } 
-            else res+=temp;
+            } else { res+=temp; }
         }
     }
-    return res;
+    if (tempcounter == counter) {
+        return res;
+    } else { return ""; }
 }
 
 int main()
 {
     std::vector<std::string> strs {"flower","flow","flight"};
-    //printVec(strs);
     std::vector<std::string> strs2 = {"dog","racecar","car"};
-    std::cout << longestCommonPrefix(strs) << '\n';
-    //std::cout << longestCommonPrefix(strs2) << '\n';
+    std::vector<std::string> strs4 = {"flower","flower","flower"};
 }
