@@ -2,6 +2,9 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <cmath>
+#include <array>
+#include <algorithm>
 
 
 /*
@@ -64,6 +67,45 @@ std::string longestCommonPrefix(const std::vector<std::string>& strs) {
     if (tempcounter == counter) {
         return res;
     } else { return ""; }
+}
+
+/*
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+    Open brackets must be closed by the same type of brackets.
+    Open brackets must be closed in the correct order.
+Input: s = "()"
+Output: true
+Input: s = "()[]{}"
+Output: true
+Input: s = "(]"
+Output: false
+1 <= s.length <= 10^4
+s consists of parentheses only '()[]{}'.
+*/
+
+bool checkAllowedChars(const std::string& s) {
+    std::array<char,6> allowedChar = {'(', '{', '[', ')', '}', ']'};
+    bool res;
+    for (auto &i : s) {
+        res = std::all_of(allowedChar.cbegin(), allowedChar.cend(), [&](const char& c) { return i==c;});
+    }
+    return res;
+}
+
+bool isValid(const std::string& s) {
+    
+    double sLength = static_cast<double>(s.length());
+    if (sLength >= 1 && sLength < pow(10,4))
+    {
+        if(checkAllowedChars(s)) {
+            
+        }
+
+    } else { return false;  }
+    return true;
 }
 
 int main()
