@@ -3,7 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <cmath>
-#include <array>
+#include <regex>
 #include <algorithm>
 
 
@@ -87,14 +87,9 @@ s consists of parentheses only '()[]{}'.
 */
 
 bool checkAllowedChars(const std::string& s) {
-    std::array<char,6> allowedChar = {'(', '{', '[', ')', '}', ']'};
-    bool res;
-    for (auto &i : s) {
-        res = std::all_of(allowedChar.cbegin(), allowedChar.cend(), [&](const char& c) { return i==c;});
-    }
-    return res;
+    const std::regex allowedChars("[\\(||\\)||\\[||\\]||\\{||\\}]+");
+    return (std::regex_match(s, allowedChars));
 }
-
 bool isValid(const std::string& s) {
     
     double sLength = static_cast<double>(s.length());
