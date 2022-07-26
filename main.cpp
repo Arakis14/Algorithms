@@ -5,7 +5,7 @@
 #include <cmath>
 #include <regex>
 #include <algorithm>
-
+#include <stack>
 
 /*
 Write a function to find the longest common prefix string amongst an array of strings.
@@ -90,22 +90,31 @@ bool checkAllowedChars(const std::string& s) {
     const std::regex allowedChars("[\\(||\\)||\\[||\\]||\\{||\\}]+");
     return (std::regex_match(s, allowedChars));
 }
-bool isValid(const std::string& s) {
-    
-    double sLength = static_cast<double>(s.length());
-    if (sLength >= 1 && sLength < pow(10,4))
-    {
-        if(checkAllowedChars(s)) {
-            
-        }
 
-    } else { return false;  }
-    return true;
+bool hasValidParenthesis(const std::string& s) {
+    std::stack<char> parenthesisSequence;
+    for (auto &i : s) {
+        if      (i == '(') { parenthesisSequence.push('a'); }
+        else if (i == '[') { parenthesisSequence.push('b'); }
+        else if (i == '{') { parenthesisSequence.push('c'); }
+        else if (i == ')' && parenthesisSequence.top() == 'a') { parenthesisSequence.pop(); }
+        else if (i == ']' && parenthesisSequence.top() == 'b') { parenthesisSequence.pop(); }
+        else if (i == '}' && parenthesisSequence.top() == 'c') { parenthesisSequence.pop(); }
+        else { return false; }
+    }
+    return parenthesisSequence.size() == 0;
+}
+
+bool checkStringLength (const std::string& s) {
+    double sLength = static_cast<double>(s.length());
+    return (sLength >= 1 && sLength < pow(10,4));
+}
+bool isValid(const std::string& s) {
+
+    return hasValidParenthesis(s) && checkAllowedChars(s) && checkStringLength(s);
 }
 
 int main()
 {
-    std::vector<std::string> strs {"flower","flow","flight"};
-    std::vector<std::string> strs2 = {"dog","racecar","car"};
-    std::vector<std::string> strs4 = {"flower","flower","flower"};
+
 }
