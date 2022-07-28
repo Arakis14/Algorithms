@@ -97,9 +97,12 @@ bool hasValidParenthesis(const std::string& s) {
         if      (i == '(') { parenthesisSequence.push('a'); }
         else if (i == '[') { parenthesisSequence.push('b'); }
         else if (i == '{') { parenthesisSequence.push('c'); }
-        else if (i == ')' && parenthesisSequence.top() == 'a') { parenthesisSequence.pop(); }
-        else if (i == ']' && parenthesisSequence.top() == 'b') { parenthesisSequence.pop(); }
-        else if (i == '}' && parenthesisSequence.top() == 'c') { parenthesisSequence.pop(); }
+        else if (i == ')' && parenthesisSequence.size() != 0 && parenthesisSequence.top() == 'a') 
+            { parenthesisSequence.pop(); }
+        else if (i == ']' && parenthesisSequence.size() != 0 && parenthesisSequence.top() == 'b') 
+            { parenthesisSequence.pop(); }
+        else if (i == '}' && parenthesisSequence.size() != 0 && parenthesisSequence.top() == 'c') 
+            { parenthesisSequence.pop(); }
         else { return false; }
     }
     return parenthesisSequence.size() == 0;
@@ -111,7 +114,7 @@ bool checkStringLength (const std::string& s) {
 }
 bool isValid(const std::string& s) {
 
-    return hasValidParenthesis(s) && checkAllowedChars(s) && checkStringLength(s);
+    return  checkStringLength(s) && checkAllowedChars(s) && hasValidParenthesis(s);
 }
 
 int main()
