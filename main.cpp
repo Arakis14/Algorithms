@@ -117,7 +117,56 @@ bool isValid(const std::string& s) {
     return  checkStringLength(s) && checkAllowedChars(s) && hasValidParenthesis(s);
 }
 
+/*
+You are given the heads of two sorted linked lists list1 and list2.
+
+Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+Return the head of the merged linked list.
+Example 1:
+Input: list1 = [1,2,4], list2 = [1,3,4]
+Output: [1,1,2,3,4,4]
+Example 2:
+Input: list1 = [], list2 = []
+Output: []
+Example 3:
+Input: list1 = [], list2 = [0]
+Output: [0]
+Constraints:
+    The number of nodes in both lists is in the range [0, 50].
+    -100 <= Node.val <= 100
+    Both list1 and list2 are sorted in non-decreasing order.
+*/
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+bool checkVal(const ListNode* list) {
+    return (list->val >= -100 && list->val <= 100);
+}
+
+bool checkNodeRange(const ListNode* list) {
+    auto counter = 0;
+    auto tempList = list;
+    while (tempList->next != nullptr) {
+        counter++;
+        tempList=tempList->next;
+    }
+    return (counter >= 0 && counter <= 50);
+}
+
+
+ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+
+}
 int main()
 {
-
+    ListNode n1;
+    n1.val = 5;
+    ListNode n2(4, &n1);
 }
