@@ -160,13 +160,42 @@ bool checkNodeRange(const ListNode* list) {
     return (counter >= 0 && counter <= 50);
 }
 
+bool checkIsListNodeSorted(const ListNode* list) {
+    auto tempList = list;
+    while (tempList->next != nullptr) {
+        if (tempList->val <= tempList->next->val) {
+            tempList=tempList->next;
+            continue;
+        }
+        else { return false; }
+    }
+    return true;
+}
 
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    auto tempList = list1;
+    auto headList = list2;
+    tempList->next = nullptr;
+    headList->next = nullptr;
+    if (checkNodeRange(list1) && checkNodeRange(list2) && checkVal(list1) && checkVal(list2) &&
+        checkIsListNodeSorted(list1) && checkIsListNodeSorted(list2)) {
+            while (list1->next != nullptr && list2->next != nullptr)
+            {
+                if(list1->val > list2->val) {
+                    tempList->val = list2->val;
+                    tempList->next = list2;
+                    list2 = list2->next;
+                } else {
+                    tempList->val = list1->val;
+                    tempList->next = list1;
+                    list1 = list1->next;
+                }
+            }
+        } else { return tempList; }
+    return tempList;
 
 }
 int main()
 {
-    ListNode n1;
-    n1.val = 5;
-    ListNode n2(4, &n1);
+
 }
