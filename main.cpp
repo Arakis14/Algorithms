@@ -216,7 +216,7 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 nums is sorted in non-decreasing order.
 
 */
-int removeDuplicates(std::vector<int>& nums) {
+long unsigned int removeDuplicates(std::vector<int>& nums) {
     nums.erase(std::unique(nums.begin(), nums.end()), nums.end());
     auto res = nums.size();
     return res;
@@ -236,10 +236,43 @@ Output: 2
 1 <= haystack.length, needle.length <= 104
 haystack and needle consist of only lowercase English characters.
 */
-int strStr(const std::string& haystack, const std::string& needle) {
+long unsigned int strStr(const std::string& haystack, const std::string& needle) {
     return haystack.find(needle, 0);
+}
+
+/*
+Given a sorted array of distinct integers and a target value, return the index if the target is found. 
+If not, return the index where it would be if it were inserted in order.
+You must write an algorithm with O(log n) runtime complexity.
+Example 1:
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+1 <= nums.length <= 104
+-104 <= nums[i] <= 104
+nums contains distinct values sorted in ascending order.
+-104 <= target <= 104
+*/
+long unsigned int searchInsert(std::vector<int>& nums, const int& target) {
+    auto pos = std::lower_bound(nums.begin(), nums.end(), target);
+    if (pos != nums.end()) {
+        return std::distance(nums.begin(), pos);
+    } else {
+        int delta = pow(10,4);
+        int index = 0;
+        int counter = 0;
+        for (auto &i : nums) {
+            counter++;
+            auto tempDelta = target - i;
+            if (abs(tempDelta) < delta ) {
+                delta = tempDelta;
+                index = counter;
+            }
+        }
+        return index;
+    }
 }
 int main()
 {
-    std::cout << strStr("aaaa", "bba");
+    std::vector<int>v {1,3,5,6};
+    std::cout << searchInsert(v,7);
 }
