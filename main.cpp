@@ -6,6 +6,7 @@
 #include <regex>
 #include <algorithm>
 #include <stack>
+#include <cctype>
 
 /*
 Write a function to find the longest common prefix string amongst an array of strings.
@@ -271,8 +272,31 @@ long unsigned int searchInsert(std::vector<int>& nums, const int& target) {
         return index;
     }
 }
+
+/*
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+
+ 
+
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+1 <= s.length <= 104
+s consists of only English letters and spaces ' '.
+There will be at least one word in s.
+*/
+long int lengthOfLastWord(const std::string& s) {
+    auto itr = std::find_if(s.rbegin(), s.rend(), [&](char c) { return std::isalpha(c); });
+    auto dd = std::find(itr, s.rend(),  ' ');
+    auto distance = std::distance(itr, dd);
+    return distance;
+}
+
 int main()
 {
-    std::vector<int>v {1,3,5,6};
-    std::cout << searchInsert(v,7);
+
 }
