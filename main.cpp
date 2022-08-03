@@ -275,13 +275,8 @@ long unsigned int searchInsert(std::vector<int>& nums, const int& target) {
 
 /*
 Given a string s consisting of words and spaces, return the length of the last word in the string.
-
 A word is a maximal substring consisting of non-space characters only.
-
- 
-
 Example 1:
-
 Input: s = "Hello World"
 Output: 5
 Explanation: The last word is "World" with length 5.
@@ -296,7 +291,67 @@ long int lengthOfLastWord(const std::string& s) {
     return distance;
 }
 
+/*
+You are given a large integer represented as an integer array digits, 
+where each digits[i] is the ith digit of the integer. 
+The digits are ordered from most significant to least significant in left-to-right order. 
+The large integer does not contain any leading 0's.
+Increment the large integer by one and return the resulting array of digits.
+Example 1:
+Input: digits = [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+Incrementing by one gives 123 + 1 = 124.
+Thus, the result should be [1,2,4].
+Example 2:
+Input: digits = [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+Incrementing by one gives 4321 + 1 = 4322.
+Thus, the result should be [4,3,2,2].
+Example 3:
+Input: digits = [9]
+Output: [1,0]
+Explanation: The array represents the integer 9.
+Incrementing by one gives 9 + 1 = 10.
+Thus, the result should be [1,0].
+Constraints:
+    1 <= digits.length <= 100
+    0 <= digits[i] <= 9
+    digits does not contain any leading 0's.
+*/
+
+std::vector<int> plusOne(std::vector<int>& digits) {
+    std::reverse(digits.begin(), digits.end());
+    for (long unsigned int i = 0; i < digits.size(); i++) {
+        if (i+1 != digits.size()) {
+            if (digits.at(i) == 9 && digits.at(i+1) == 9) {
+                digits.at(i) = 0;
+                continue;
+            }
+            else if (digits.at(i) == 9) {
+                digits.at(i) = 0;
+                continue;
+
+            } else {
+                digits.at(i) += 1;
+                break;
+            } 
+        } else { 
+            if (digits.at(i) == 9) {
+                digits.at(i) = 0;
+                //why 0?
+                digits.push_back(0); 
+            }
+            else { digits.at(i) += 1; }
+        }
+    }
+    std::reverse(digits.begin(), digits.end());
+    return digits;
+}
 int main()
 {
-
+    std::vector<int> vec {9};
+    plusOne(vec);
+    printVec(vec);
 }
