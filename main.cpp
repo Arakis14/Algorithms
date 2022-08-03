@@ -272,17 +272,11 @@ long unsigned int searchInsert(std::vector<int>& nums, const int& target) {
         return index;
     }
 }
-<<<<<<< HEAD
 
 /*
 Given a string s consisting of words and spaces, return the length of the last word in the string.
-
 A word is a maximal substring consisting of non-space characters only.
-
- 
-
 Example 1:
-
 Input: s = "Hello World"
 Output: 5
 Explanation: The last word is "World" with length 5.
@@ -297,7 +291,6 @@ long int lengthOfLastWord(const std::string& s) {
     return distance;
 }
 
-=======
 /*
 You are given a large integer represented as an integer array digits, 
 where each digits[i] is the ith digit of the integer. 
@@ -329,9 +322,36 @@ Constraints:
 */
 
 std::vector<int> plusOne(std::vector<int>& digits) {
+    std::reverse(digits.begin(), digits.end());
+    for (long unsigned int i = 0; i < digits.size(); i++) {
+        if (i+1 != digits.size()) {
+            if (digits.at(i) == 9 && digits.at(i+1) == 9) {
+                digits.at(i) = 0;
+                continue;
+            }
+            else if (digits.at(i) == 9) {
+                digits.at(i) = 0;
+                continue;
+
+            } else {
+                digits.at(i) += 1;
+                break;
+            } 
+        } else { 
+            if (digits.at(i) == 9) {
+                digits.at(i) = 0;
+                //why 0?
+                digits.push_back(0); 
+            }
+            else { digits.at(i) += 1; }
+        }
+    }
+    std::reverse(digits.begin(), digits.end());
+    return digits;
 }
->>>>>>> 8f9ce31... plusOne start
 int main()
 {
-
+    std::vector<int> vec {9};
+    plusOne(vec);
+    printVec(vec);
 }
