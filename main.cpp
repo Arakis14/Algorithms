@@ -349,9 +349,38 @@ std::vector<int> plusOne(std::vector<int>& digits) {
     std::reverse(digits.begin(), digits.end());
     return digits;
 }
+/*
+Given two binary strings a and b, return their sum as a binary string.
+Example 1:
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+Input: a = "1010", b = "1011"
+Output: "10101"
+Constraints:
+    1 <= a.length, b.length <= 104
+    a and b consist only of '0' or '1' characters.
+    Each string does not contain leading zeros except for the zero itself.
+*/
+
+int convertToDecimal(const std::string& binary) {
+    auto reverse = binary;
+    std::reverse(reverse.begin(), reverse.end());
+    int decimalPlace = 0;
+    int temp = 0;
+    for (auto& i : reverse) {
+        decimalPlace++;
+        if ( i == '1' ) {
+            temp += decimalPlace * 1;
+        }
+    }
+    return temp;
+}
+std::string addBinary(const std::string& a, const std::string& b) {
+    std::string res = "";
+}
+
 int main()
 {
-    std::vector<int> vec {9};
-    plusOne(vec);
-    printVec(vec);
+    std::cout << convertToDecimal("11111");
 }
