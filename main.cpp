@@ -363,24 +363,42 @@ Constraints:
     Each string does not contain leading zeros except for the zero itself.
 */
 
-int convertToDecimal(const std::string& binary) {
+unsigned long long convertToDecimal(const std::string& binary) {
     auto reverse = binary;
     std::reverse(reverse.begin(), reverse.end());
-    int decimalPlace = 0;
-    int temp = 0;
+    long double decimalPlace = 0;
+    long double temp = 0;
     for (auto& i : reverse) {
-        decimalPlace++;
         if ( i == '1' ) {
-            temp += decimalPlace * 1;
+            temp += powl(2,decimalPlace);
         }
+        decimalPlace++;
     }
-    return temp;
+    return static_cast<unsigned long long> (temp);
 }
+
+std::string converToBinary(const unsigned long long& input) {
+    unsigned long long decimal = input;
+    long double binary = 0, product = 1;
+    long double remainder = 0;
+    while (decimal != 0) {
+        remainder = decimal % 2;
+        binary = binary + (remainder * product);
+        decimal = decimal / 2;
+        product *= 10;
+    }
+
+    return std::to_string(binary);
+}
+
 std::string addBinary(const std::string& a, const std::string& b) {
-    std::string res = "";
+    long double aDecimal = convertToDecimal(a);
+    long double bDecimal = convertToDecimal(b);
+    auto result = aDecimal + bDecimal;
+    return converToBinary(result);
 }
 
 int main()
 {
-    std::cout << convertToDecimal("11111");
+
 }
