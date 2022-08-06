@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <stack>
 #include <cctype>
+#include <stdlib.h>
+#include <time.h>       
 
 /*
 Write a function to find the longest common prefix string amongst an array of strings.
@@ -406,7 +408,38 @@ Constrains:
 auto multiplyLongNumbers(const double& a, const double& b) {
     return a * b;
 }
+
+/*
+You are climbing a staircase. It takes n steps to reach the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Example 1:
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+Constraints:
+    1 <= n <= 45
+*/
+int climbStairs(const int& n) {
+    srand (time(NULL));
+    int temp = n;
+    std::vector<int> sequence {};
+    for (auto i = 0; i < 1000; i++) {
+        while (temp != 0) {
+            int step = rand() % 2 + 1;
+            if (step > temp) {
+                temp -= 1;
+                sequence.push_back(1);
+            } else {
+                temp -= step;
+                sequence.push_back(step);
+            } 
+        }
+        
+    }
+}
 int main()
 {
-
+    
 }
