@@ -398,6 +398,14 @@ std::string addBinary(const std::string& a, const std::string& b) {
     return converToBinary(result);
 }
 
+/*
+Multiply two long numbers. Max 100 digits. Only natural numbers. 
+Constrains:
+0 <= x < 10^99
+*/
+auto multiplyLongNumbers(const double& a, const double& b) {
+    return a * b;
+}
 int main()
 {
 
